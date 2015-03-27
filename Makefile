@@ -17,7 +17,7 @@ VPATH = kernel: \
 
 LDSCRIPT = linker.ld
 
-CFLAGS = -g -c -Wall -Os -mthumb -mcpu=cortex-m3 $(INC)
+CFLAGS = -g -c -Wall -Os -mthumb -mcpu=cortex-m3 $(INC) -std=c99
 LFLAGS = -g -Wall -Os -mthumb -mcpu=cortex-m3 -nostartfiles --specs=nano.specs -T$(LDSCRIPT)
 
 OUTPUT = app.elf
@@ -33,10 +33,12 @@ OBJS = 	list.o \
 		main.o \
 		uart.o \
 		lcd.o \
-		spi.o \
-		radio.o \
 		syscalls.o \
-		delay.o 
+		delay.o \
+		nrf24l01.o \
+		lpc17xx_ssp.o \
+		cpu_lpc1000.o \
+		lpc17xx_clkpwr.o \
 
 all: $(OBJS)
 	$(CC)gcc $(LFLAGS) $(OBJS) -o $(OUTPUT)
@@ -81,14 +83,20 @@ uart.o: uart.c
 syscalls.o: syscalls.c
 	$(CC)gcc $(CFLAGS) $^ -o $@
 
-spi.o: spi.c
-	$(CC)gcc $(CFLAGS) $^ -o $@
-
-radio.o: radio.c
-	$(CC)gcc $(CFLAGS) $^ -o $@
-
 delay.o: delay.c
 	$(CC)gcc $(CFLAGS) $^ -o $@
 
 lcd.o: lcd.c
+	$(CC)gcc $(CFLAGS) $^ -o $@
+
+nrf24l01.o: nrf24l01.c
+	$(CC)gcc $(CFLAGS) $^ -o $@
+
+lpc17xx_ssp.o: lpc17xx_ssp.c
+	$(CC)gcc $(CFLAGS) $^ -o $@
+
+cpu_lpc1000.o: cpu_lpc1000.c
+	$(CC)gcc $(CFLAGS) $^ -o $@
+
+lpc17xx_clkpwr.o: lpc17xx_clkpwr.c
 	$(CC)gcc $(CFLAGS) $^ -o $@

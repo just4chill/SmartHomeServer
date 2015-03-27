@@ -2,12 +2,12 @@
 #ifndef __lcd_h__
 #define __lcd_h__
 
-#define LCD_RS 4
-#define LCD_EN 5
-#define LCD_D4 6
-#define LCD_D5 7
-#define LCD_D6 8
-#define LCD_D7 9
+#define LCD_RS 10
+#define LCD_EN 11
+#define LCD_D4 19
+#define LCD_D5 20
+#define LCD_D6 21
+#define LCD_D7 22
 
 #define EN_TRIGGER_DELAY 20
 
